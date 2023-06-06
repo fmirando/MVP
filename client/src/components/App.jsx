@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Form } from 'react-bootstrap';
 import { createClient } from '@supabase/supabase-js';
 import { v4 as uuidv4 } from 'uuid';
-import { decode } from 'base64-arraybuffer';
 
 // Creating connection to supabase: supabase project url and key
 
