@@ -24,6 +24,7 @@ const CDN_IMAGES_URL = 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/obje
 
 function App() {
   const [music, setMusic] = useState([]);
+  const [images, setImages] = useState([]);
   const [songFile, setSongFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [upload, setUpload] = useState(false);
@@ -36,17 +37,31 @@ function App() {
       .from('Music')
       .list('');
     if (data !== null) {
-      console.log('data', data);
+      console.log('music', data);
       setMusic(data.filter((song) => song.name !== '.emptyFolderPlaceholder'));
     } else {
-      alert('Error grabbing files from Supabase :(', error);
+      alert('Error grabbing music from Supabase :(', error);
+    }
+  }
+
+  // GET IMAGES FROM SUPABASE
+  async function getImages() {
+    const { data, error } = await supabase
+      .storage
+      .from('SongArt')
+      .list('');
+    if (data !== null) {
+      console.log('Images', data);
+      setImages(data.filter((image) => image.name !== '.emptyFolderPlaceholder'));
+    } else {
+      alert('Error grabbing images from Supabase :(', error);
     }
   }
 
   // UPLOAD IMAGE TO SUPABASE
   async function uploadImage(img) {
     console.log('Upload image!');
-    const { error } = await supabase.storage
+    const { data, error } = await supabase.storage
       .from('SongArt')
       .upload(`${uuidv4()}.image`, img);
     if (error) {
@@ -54,13 +69,14 @@ function App() {
       alert('Error uploading image file to Supabase :(');
     } else {
       console.log('File successfully uploaded :)');
+      console.log('You uploaded this: ', data);
     }
   }
 
   // UPLOAD SONG TO SUPABASE
   async function uploadSong(song) {
     console.log('Upload file!');
-    const { error } = await supabase.storage
+    const { data, error } = await supabase.storage
       .from('Music')
       .upload(`${uuidv4()}.mp3`, song);
     if (error) {
@@ -68,6 +84,7 @@ function App() {
       alert('Error uploading music file to Supabase :(');
     } else {
       console.log('File successfully uploaded :)');
+      console.log('You uploaded this: ', data);
     }
     // getMusic();
   }
@@ -75,6 +92,7 @@ function App() {
   // Possible refactor: send axios request to server instead
   useEffect(() => {
     getMusic();
+    getImages();
   }, []);
 
   console.log(music);
@@ -112,6 +130,7 @@ function App() {
 
                 // Reset the file inputs and update page with new data
                 getMusic();
+                getImages();
                 setUpload(false);
                 setSongFile(null);
                 setImageFile(null);
@@ -122,8 +141,7 @@ function App() {
           </Button>
         </>
       )}
-
-      <SongCarousel music={music} CDN_MUSIC_URL={CDN_MUSIC_URL} CDN_IMAGES_URL={CDN_IMAGES_URL} />
+      <SongCarousel music={music} images={images} CDN_MUSIC_URL={CDN_MUSIC_URL} CDN_IMAGES_URL={CDN_IMAGES_URL} />
     </Container>
   );
 }
