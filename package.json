@@ -32,6 +32,7 @@
     "react-audio-player": "^0.17.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
     "swiper": "^9.3.2",
     "uuid": "^9.0.0"
   },

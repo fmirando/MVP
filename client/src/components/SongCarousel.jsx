@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useRef } from 'react';
 // import AudioPlayer from 'react-audio-player';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
@@ -14,6 +14,21 @@ function SongCarousel({
 }) {
   // TODO: axios.get from db to get song and image urls all in one array
   // [{songURL, imageURL}, {}, etc]
+
+  const swiperRef = useRef(null);
+
+  const handleNextSlide = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const handlePrevSlide = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+
   if (music.length !== 0) {
     return (
       <div className="container">
@@ -42,11 +57,11 @@ function SongCarousel({
           }}
           modules={[EffectCoverflow, Pagination, Navigation]}
           className="swiper_container"
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {music.map((song, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i}>
               <SongCard
-                key={i}
                 song={song}
                 image={images[i]}
                 CDN_MUSIC_URL={CDN_MUSIC_URL}
@@ -56,10 +71,10 @@ function SongCarousel({
           ))}
         </Swiper>
         <div className="slider-controler">
-          <div className="swiper-button-prev slider-arrow">
+          <div className="swiper-button-prev slider-arrow" onClick={handlePrevSlide}>
             <ion-icon name="arrow-back-outline" />
           </div>
-          <div className="swiper-button-next slider-arrow">
+          <div className="swiper-button-next slider-arrow" onClick={handleNextSlide}>
             <ion-icon name="arrow-forward-outline" />
           </div>
           <div className="swiper-pagination" />

@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 // Component imports
 import SongCarousel from './SongCarousel';
+import LoadingIcon from './LoadingIcon';
 
 // Creating connection to supabase: supabase project url and key
 const supabase = createClient('https://wlcwstpeuowhoknayute.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsY3dzdHBldW93aG9rbmF5dXRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYwNzQ0NDgsImV4cCI6MjAwMTY1MDQ0OH0.7T2u8O81YdZD38jNrtI3zblv5_5KSxl6iOVJPvnY4jc');
@@ -28,6 +29,7 @@ function App() {
   const [songFile, setSongFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [upload, setUpload] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // GET MUSIC FROM SUPABASE
   // TODO: Possibly refactor to grab from db instead
@@ -60,22 +62,24 @@ function App() {
 
   // UPLOAD IMAGE TO SUPABASE
   async function uploadImage(img) {
-    console.log('Upload image!');
+    setLoading(true);
     const { data, error } = await supabase.storage
       .from('SongArt')
       .upload(`${uuidv4()}.image`, img);
     if (error) {
+      setLoading(false);
       console.error(error);
       alert('Error uploading image file to Supabase :(');
     } else {
-      console.log('File successfully uploaded :)');
+      setLoading(false);
+      alert('File successfully uploaded :)');
       console.log('You uploaded this: ', data);
     }
   }
 
   // UPLOAD SONG TO SUPABASE
   async function uploadSong(song) {
-    console.log('Upload file!');
+    setLoading(true);
     const { data, error } = await supabase.storage
       .from('Music')
       .upload(`${uuidv4()}.mp3`, song);
@@ -83,7 +87,8 @@ function App() {
       console.error(error);
       alert('Error uploading music file to Supabase :(');
     } else {
-      console.log('File successfully uploaded :)');
+      setLoading(false);
+      alert('File successfully uploaded :)');
       console.log('You uploaded this: ', data);
     }
     // getMusic();
@@ -108,6 +113,10 @@ function App() {
         Upload
 
       </Button>
+
+      {loading && (
+        <LoadingIcon />
+      )}
 
       {upload && (
         <>
@@ -141,7 +150,12 @@ function App() {
           </Button>
         </>
       )}
-      <SongCarousel music={music} images={images} CDN_MUSIC_URL={CDN_MUSIC_URL} CDN_IMAGES_URL={CDN_IMAGES_URL} />
+      <SongCarousel
+        music={music}
+        images={images}
+        CDN_MUSIC_URL={CDN_MUSIC_URL}
+        CDN_IMAGES_URL={CDN_IMAGES_URL}
+      />
     </Container>
   );
 }
