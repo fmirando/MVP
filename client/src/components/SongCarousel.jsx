@@ -31,13 +31,13 @@ function SongCarousel({
   if (music.length !== 0) {
     return (
       <div className="container">
-        <h1>Dejaview</h1>
         <Swiper
           effect="coverflow"
           grabCursor="true"
           centeredSlides="true"
           loop="true"
           slidesPerView="3"
+          spaceBetween="5"
           coverflowEffect={{
             rotate: 0,
             stretch: 0,
