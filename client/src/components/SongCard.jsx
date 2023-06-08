@@ -10,16 +10,17 @@ function SongCard({ song, image, CDN_MUSIC_URL, CDN_IMAGES_URL }) {
       <div
         style={{
           position: 'relative',
-          width: '70%',
-          margin: 'auto',
+          width: '80%',
           border: '1px solid #ccc',
           borderRadius: '8px',
           overflow: 'hidden',
+          height: '200px', // Adjust the height as desired
+          transform: 'scale(1.3)',
         }}
       >
         <img
           src={CDN_IMAGES_URL + image.name}
-          style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+          style={{ width: '100%', height: '60%', borderRadius: '8px' }}
         />
         <div
           style={{
@@ -30,6 +31,7 @@ function SongCard({ song, image, CDN_MUSIC_URL, CDN_IMAGES_URL }) {
             padding: '8px',
             background: 'rgba(255, 255, 255, 0.8)',
             boxSizing: 'border-box',
+            height: '40%', // Adjust the height as desired
           }}
         >
           <AudioPlayer

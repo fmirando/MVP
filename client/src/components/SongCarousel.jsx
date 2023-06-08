@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useRef } from 'react';
-// import AudioPlayer from 'react-audio-player';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { EffectCoverflow, Pagination, Navigation } from 'swiper';
 import SongCard from './SongCard';
@@ -35,10 +34,10 @@ function SongCarousel({
         <h1>Dejaview</h1>
         <Swiper
           effect="coverflow"
-          grabCursor
-          centeredSlides
-          loop
-          slidesPerView="auto"
+          grabCursor="true"
+          centeredSlides="true"
+          loop="true"
+          slidesPerView="3"
           coverflowEffect={{
             rotate: 0,
             stretch: 0,
@@ -60,12 +59,13 @@ function SongCarousel({
           onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           {music.map((song, i) => (
-            <SwiperSlide key={i}>
+            <SwiperSlide >
               <SongCard
                 song={song}
                 image={images[i]}
                 CDN_MUSIC_URL={CDN_MUSIC_URL}
                 CDN_IMAGES_URL={CDN_IMAGES_URL}
+                key={i}
               />
             </SwiperSlide>
           ))}
