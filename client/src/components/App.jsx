@@ -1,12 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
-import AudioPlayer from 'react-audio-player';
 
 // CSS/bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  Container, Form, Button, Card,
+  Container, Form, Button,
 } from 'react-bootstrap';
 
 // Supabase imports
@@ -17,6 +16,9 @@ import { v4 as uuidv4 } from 'uuid';
 import SongCarousel from './SongCarousel';
 import LoadingIcon from './LoadingIcon';
 
+// Importing sample data (temporary)
+import sampleData from './sampleData/sampleData';
+
 // Creating connection to supabase: supabase project url and key
 const supabase = createClient('https://wlcwstpeuowhoknayute.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsY3dzdHBldW93aG9rbmF5dXRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYwNzQ0NDgsImV4cCI6MjAwMTY1MDQ0OH0.7T2u8O81YdZD38jNrtI3zblv5_5KSxl6iOVJPvnY4jc');
 
@@ -24,12 +26,17 @@ const CDN_MUSIC_URL = 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/objec
 const CDN_IMAGES_URL = 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/object/public/SongArt/';
 
 function App() {
+  // Old states (probably don't need all of these)
   const [music, setMusic] = useState([]);
   const [images, setImages] = useState([]);
   const [songFile, setSongFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [upload, setUpload] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  // New states
+  const [cardData, setCardData] = useState(sampleData);
+  const [modalView, setModalView] = useState(false);
 
   // GET MUSIC FROM SUPABASE
   // TODO: Possibly refactor to grab from db instead
@@ -47,6 +54,7 @@ function App() {
   }
 
   // GET IMAGES FROM SUPABASE
+  // May not need this anymore, just grab url from DB
   async function getImages() {
     const { data, error } = await supabase
       .storage
@@ -61,6 +69,7 @@ function App() {
   }
 
   // UPLOAD IMAGE TO SUPABASE
+  // May not need this anymore, just grab url from DB
   async function uploadImage(img) {
     setLoading(true);
     const { data, error } = await supabase.storage
@@ -78,6 +87,7 @@ function App() {
   }
 
   // UPLOAD SONG TO SUPABASE
+  // Need to refactor so that it uploads to my DB as well
   async function uploadSong(song) {
     setLoading(true);
     const { data, error } = await supabase.storage
@@ -100,8 +110,7 @@ function App() {
     getImages();
   }, []);
 
-  console.log(music);
-
+  // TODO: change upload form into a pop up modal instead
   return (
     <Container className="mt-5" style={{ width: '700px' }}>
       <h1>Music Gallery</h1>
@@ -156,6 +165,7 @@ function App() {
         CDN_MUSIC_URL={CDN_MUSIC_URL}
         CDN_IMAGES_URL={CDN_IMAGES_URL}
       />
+
     </Container>
   );
 }
