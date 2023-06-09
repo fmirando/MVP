@@ -17,13 +17,17 @@ function SongCard({ song }) {
       style={{
         position: 'relative',
         width: '400px',
-        paddingTop: '200%', // Adjust the top padding to control the height
+        paddingTop: '220%', // Adjust the top padding to control the height
         borderRadius: '8px',
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
 
-      <InfoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      {/* <InfoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
+
+      {isModalOpen && (
+        <InfoModal song={song} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      )}
 
       <img
         src={song.imageURL}
@@ -44,7 +48,7 @@ function SongCard({ song }) {
         }}
       >
         <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>
-        <h3>{song.songName}</h3>
+        <h3 style={{ textAlign: 'center' }}>{song.songName}</h3>
 
         <AudioPlayer
           src={song.songURL}

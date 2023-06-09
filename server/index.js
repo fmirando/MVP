@@ -12,6 +12,8 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
+// Routes
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server available at http://localhost${PORT}`);

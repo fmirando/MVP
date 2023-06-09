@@ -36,6 +36,12 @@ function App() {
 
   // New states
   const [cardData, setCardData] = useState(sampleData);
+  const [artist, setArtist] = useState('');
+  const [songName, setSongName] = useState('');
+  const [genre, setGenre] = useState('');
+  const [bpm, setBpm] = useState('');
+  const [key, setKey] = useState('');
+  const [description, setDescription] = useState('');
 
   // GET MUSIC FROM SUPABASE
   // TODO: Possibly refactor to grab from db instead
@@ -96,6 +102,9 @@ function App() {
       console.error(error);
       alert('Error uploading music file to Supabase :(');
     } else {
+      // TODO: after uploading, i need to grab the link and concatenate it with the cdn link
+      // Then store in state
+      // Also need to immediately add to cardData state so page rerenders with new song card
       setLoading(false);
       alert('File successfully uploaded :)');
       console.log('You uploaded this: ', data);
@@ -111,9 +120,15 @@ function App() {
 
   // TODO: change upload form into a pop up modal instead
   return (
-    <Container className="mt-5" style={{ width: '700px' }}>
+    <Container className="mt-1" style={{ width: '700px' }}>
       <h1 className="heading">Music Gallery</h1>
       <Button
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          margin: '20px',
+        }}
         onClick={(e) => {
           e.preventDefault();
           setUpload(!upload);
@@ -137,6 +152,36 @@ function App() {
           <Form.Group className="mb-3">
             <Form.Label>Upload your image here!</Form.Label>
             <Form.Control type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Artist</Form.Label>
+            <Form.Control type="text" value={artist} onChange={(e) => setArtist(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Song Name</Form.Label>
+            <Form.Control type="text" value={songName} onChange={(e) => setSongName(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Genre</Form.Label>
+            <Form.Control type="text" value={genre} onChange={(e) => setGenre(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>BPM</Form.Label>
+            <Form.Control type="number" value={bpm} onChange={(e) => setBpm(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Key</Form.Label>
+            <Form.Control type="text" value={key} onChange={(e) => setKey(e.target.value)} />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Description</Form.Label>
+            <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
           </Form.Group>
           <Button
             variant="primary"

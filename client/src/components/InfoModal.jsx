@@ -1,16 +1,63 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Modal from 'react-modal';
 
-function InfoModal({ isModalOpen, setIsModalOpen }) {
+function InfoModal({ song, isModalOpen, setIsModalOpen }) {
   return ReactDom.createPortal(
-    <Modal
+    <div
       className="modal"
-      isOpen={isModalOpen}
-      onRequestClose={() => setIsModalOpen(false)}
+      style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '400px',
+        height: '400px',
+        background: 'rgba(255, 255, 255, 0.8)',
+        // background: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: '10px',
+      }}
     >
-      AHHHHHHHHHHHHHHHHHHHHHHH
-    </Modal>,
+      <button type="button" onClick={() => setIsModalOpen(false)}>Close</button>
+      <h3>
+        Artist:
+        {' '}
+        {song.artist}
+      </h3>
+      <h4>
+        Song Name:
+        {' '}
+        {song.songName}
+      </h4>
+      <p>
+        Genre:
+        {' '}
+        {song.genre}
+      </p>
+      <p>
+        DAW used:
+        {' '}
+        {song.daw}
+      </p>
+      <p>
+        BPM
+        {' '}
+        {song.bpm}
+      </p>
+      <p>
+        Key:
+        {' '}
+        {song.key}
+      </p>
+      <p>
+        Description:
+        {' '}
+        {song.description}
+      </p>
+    </div>,
     document.getElementById('portal'),
   );
 }

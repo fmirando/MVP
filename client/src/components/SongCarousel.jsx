@@ -40,7 +40,7 @@ function SongCarousel({ cardData }) {
         centeredSlides="true"
         loop="true"
         slidesPerView="3"
-        spaceBetween="30"
+        spaceBetween="10"
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
@@ -51,7 +51,7 @@ function SongCarousel({ cardData }) {
           el: '.swiper-pagination',
           clickable: true,
           dynamicBullets: true,
-          dynamicMainBullets: 5,
+          dynamicMainBullets: 3,
         }}
         navigation={{
           nextEl: '.swiper-button-next',
