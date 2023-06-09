@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AudioPlayer from 'react-audio-player';
 import { Button } from 'react-bootstrap';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import InfoModal from './InfoModal';
 
 function SongCard({ song }) {
@@ -22,8 +23,6 @@ function SongCard({ song }) {
         overflow: 'visible',
       }}
     >
-
-      {/* <InfoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
 
       {isModalOpen && (
         <InfoModal song={song} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
@@ -47,6 +46,15 @@ function SongCard({ song }) {
           boxSizing: 'border-box',
         }}
       >
+        <BsThreeDotsVertical
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            transform: 'scale(1.8)',
+          }}
+        />
+
         <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>
         <h3 style={{ textAlign: 'center' }}>{song.songName}</h3>
 

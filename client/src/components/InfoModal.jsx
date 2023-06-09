@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 
 function InfoModal({ song, isModalOpen, setIsModalOpen }) {
   return ReactDom.createPortal(
@@ -12,8 +13,7 @@ function InfoModal({ song, isModalOpen, setIsModalOpen }) {
         transform: 'translate(-50%, -50%)',
         width: '400px',
         height: '400px',
-        background: 'rgba(255, 255, 255, 0.8)',
-        // background: 'white',
+        background: 'rgba(255, 255, 255, 0.9)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -21,7 +21,21 @@ function InfoModal({ song, isModalOpen, setIsModalOpen }) {
         borderRadius: '10px',
       }}
     >
-      <button type="button" onClick={() => setIsModalOpen(false)}>Close</button>
+      <button
+        type="button"
+        onClick={() => setIsModalOpen(false)}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          border: 'none',
+          background: 'none',
+          cursor: 'pointer',
+          fontSize: '20px',
+        }}
+      >
+        <AiOutlineClose />
+      </button>
       <h3>
         Artist:
         {' '}
