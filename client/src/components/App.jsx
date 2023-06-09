@@ -36,7 +36,6 @@ function App() {
 
   // New states
   const [cardData, setCardData] = useState(sampleData);
-  const [modalView, setModalView] = useState(false);
 
   // GET MUSIC FROM SUPABASE
   // TODO: Possibly refactor to grab from db instead
@@ -113,11 +112,12 @@ function App() {
   // TODO: change upload form into a pop up modal instead
   return (
     <Container className="mt-5" style={{ width: '700px' }}>
-      <h1>Music Gallery</h1>
-      <Button onClick={(e) => {
-        e.preventDefault();
-        setUpload(!upload);
-      }}
+      <h1 className="heading">Music Gallery</h1>
+      <Button
+        onClick={(e) => {
+          e.preventDefault();
+          setUpload(!upload);
+        }}
       >
         Upload
 
@@ -160,10 +160,11 @@ function App() {
         </>
       )}
       <SongCarousel
-        music={music}
-        images={images}
-        CDN_MUSIC_URL={CDN_MUSIC_URL}
-        CDN_IMAGES_URL={CDN_IMAGES_URL}
+        // music={music}
+        // images={images}
+        // CDN_MUSIC_URL={CDN_MUSIC_URL}
+        // CDN_IMAGES_URL={CDN_IMAGES_URL}
+        cardData={cardData}
       />
 
     </Container>

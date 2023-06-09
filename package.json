@@ -33,8 +33,10 @@
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
+    "react-modal": "^3.16.1",
     "swiper": "^9.3.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "wavesurfer.js": "^7.0.0-beta.6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.4",

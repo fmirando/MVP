@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AudioPlayer from 'react-audio-player';
+import { Button } from 'react-bootstrap';
+import InfoModal from './InfoModal';
 
-function SongCard({
-  song, image, CDN_MUSIC_URL, CDN_IMAGES_URL,
-}) {
+function SongCard({ song }) {
   // Renders a single song card
   // Artist, song name, genre, DAW used, bpm, key
-  console.log('image', image);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  if (!song || !image) {
+  if (!song.songURL || !song.imageURL) {
     return null;
   }
 
@@ -17,13 +17,17 @@ function SongCard({
       style={{
         position: 'relative',
         width: '400px',
-        paddingTop: '150%', // Adjust the top padding to control the height
+        paddingTop: '200%', // Adjust the top padding to control the height
         borderRadius: '8px',
         overflow: 'hidden',
       }}
     >
+
+      <InfoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+
       <img
-        src={CDN_IMAGES_URL + image.name}
+        src={song.imageURL}
+        alt="song-art"
         style={{
           position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px',
         }}
@@ -39,8 +43,10 @@ function SongCard({
           boxSizing: 'border-box',
         }}
       >
+        <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>
+
         <AudioPlayer
-          src={CDN_MUSIC_URL + song.name}
+          src={song.songURL}
           controls
           controlsList="nodownload"
           style={{
@@ -53,7 +59,6 @@ function SongCard({
               width: 100%;
             }
           `}
-
         </style>
       </div>
     </div>
