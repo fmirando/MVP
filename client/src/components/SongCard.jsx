@@ -44,6 +44,7 @@ function SongCard({ song }) {
         }}
       >
         <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>
+        <h3>{song.songName}</h3>
 
         <AudioPlayer
           src={song.songURL}
