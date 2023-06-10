@@ -121,7 +121,7 @@ function App() {
   // TODO: change upload form into a pop up modal instead
   return (
     <Container className="mt-1" style={{ width: '700px' }}>
-      <h1 className="heading">Music Gallery</h1>
+      <h1 className="heading">WavCard</h1>
       <Button
         style={{
           position: 'absolute',

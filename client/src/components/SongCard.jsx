@@ -19,7 +19,7 @@ function SongCard({ song }) {
         position: 'relative',
         width: '400px',
         paddingTop: '220%', // Adjust the top padding to control the height
-        borderRadius: '8px',
+        borderRadius: '14px',
         overflow: 'visible',
       }}
     >

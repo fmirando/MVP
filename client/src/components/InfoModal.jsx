@@ -57,7 +57,7 @@ function InfoModal({ song, isModalOpen, setIsModalOpen }) {
         {song.daw}
       </p>
       <p>
-        BPM
+        BPM:
         {' '}
         {song.bpm}
       </p>
