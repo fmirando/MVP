@@ -36,41 +36,51 @@ function InfoModal({ song, isModalOpen, setIsModalOpen }) {
       >
         <AiOutlineClose />
       </button>
-      <h3>
-        Artist:
-        {' '}
-        {song.artist}
-      </h3>
-      <h4>
-        Song Name:
-        {' '}
-        {song.songName}
-      </h4>
-      <p>
-        Genre:
-        {' '}
-        {song.genre}
-      </p>
-      <p>
-        DAW used:
-        {' '}
-        {song.daw}
-      </p>
-      <p>
-        BPM:
-        {' '}
-        {song.bpm}
-      </p>
-      <p>
-        Key:
-        {' '}
-        {song.key}
-      </p>
-      <p>
-        Description:
-        {' '}
-        {song.description}
-      </p>
+
+      <div style={{
+        padding: '10%',
+        fontSize: '15px',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      >
+        <h3>
+          Artist:
+          {' '}
+          {song.artist}
+        </h3>
+        <h4>
+          Song Name:
+          {' '}
+          {song.songName}
+        </h4>
+        <p>
+          Genre:
+          {' '}
+          {song.genre}
+        </p>
+        <p>
+          DAW used:
+          {' '}
+          {song.daw}
+        </p>
+        <p>
+          BPM:
+          {' '}
+          {song.bpm}
+        </p>
+        <p>
+          Key:
+          {' '}
+          {song.key}
+        </p>
+        <p>
+          Description:
+          {' '}
+          {song.description}
+        </p>
+
+      </div>
     </div>,
     document.getElementById('portal'),
   );

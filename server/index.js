@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 
+const db = require('../db/db');
 const songControllers = require('../db/controllers/songController');
 
 const app = express();

@@ -11,7 +11,7 @@ SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 function SongCarousel({ cardData }) {
   // TODO: axios.get from db to get song and image urls all in one array
   // [{songURL, imageURL}, {}, etc]
-
+  console.log('cardData >>> ', cardData);
   const swiperRef = useRef(null);
 
   const handleNextSlide = () => {
