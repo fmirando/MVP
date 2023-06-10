@@ -60,7 +60,6 @@ function App() {
       alert('Error uploading image file to Supabase :(');
     } else {
       const imagePath = CDN_IMAGES_URL + data.path;
-      alert('File successfully uploaded :)');
       console.log('You uploaded this: ', data.path);
       return imagePath;
     }
@@ -99,6 +98,12 @@ function App() {
                 // Update cardData state so new song immediately renders on page
                 setCardData([...cardData, updatedData]);
                 alert('Successfully uploaded to database :)');
+
+                // Reset input fields
+                setSongData(Object.keys(songData).reduce((acc, key) => {
+                  acc[key] = '';
+                  return acc;
+                }, {}));
               })
               .catch((err) => {
                 console.error('Something went wrong with axios.post...', err);
