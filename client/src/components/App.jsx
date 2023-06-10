@@ -221,6 +221,7 @@ function App() {
       )}
       <SongCarousel
         cardData={cardData}
+        setCardData={setCardData}
       />
 
     </Container>

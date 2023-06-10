@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import AudioPlayer from 'react-audio-player';
 import { Button } from 'react-bootstrap';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import InfoModal from './InfoModal';
 
-function SongCard({ song }) {
+function SongCard({ song, cardData, setCardData }) {
   // Renders a single song card
   // Artist, song name, genre, DAW used, bpm, key
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,6 +13,22 @@ function SongCard({ song }) {
   if (!song.songURL || !song.imageURL) {
     return null;
   }
+
+  const handleDelete = (songToDelete) => {
+    const confirmed = window.confirm('Are you sure you want to delete this song? D:');
+    if (confirmed) {
+      const deleted = { songName: song.songName };
+      axios.delete('/deletemusic', { data: deleted })
+        .then(() => {
+          alert('Successfully deleted song');
+          // TODO: reset cardData state so that page re renders without song that was just deleted
+          setCardData(cardData.filter((updated) => updated.songName !== deleted.songName));
+        })
+        .catch((err) => {
+          console.error('Unable to delete song...', err);
+        });
+    }
+  };
 
   return (
     <div
@@ -53,6 +70,7 @@ function SongCard({ song }) {
             right: '10px',
             transform: 'scale(1.8)',
           }}
+          onClick={() => handleDelete(song)}
         />
 
         <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>

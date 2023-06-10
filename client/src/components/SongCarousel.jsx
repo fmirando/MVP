@@ -8,7 +8,7 @@ import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
-function SongCarousel({ cardData }) {
+function SongCarousel({ cardData, setCardData }) {
   // TODO: axios.get from db to get song and image urls all in one array
   // [{songURL, imageURL}, {}, etc]
   console.log('cardData >>> ', cardData);
@@ -64,11 +64,9 @@ function SongCarousel({ cardData }) {
         {cardData.map((song, i) => (
           <SwiperSlide>
             <SongCard
-              // song={song}
-              // image={images[i]}
-              // CDN_MUSIC_URL={CDN_MUSIC_URL}
-              // CDN_IMAGES_URL={CDN_IMAGES_URL}
               song={song}
+              cardData={cardData}
+              setCardData={setCardData}
               key={i}
             />
           </SwiperSlide>

@@ -35,5 +35,14 @@ module.exports = {
 
   deleteSong: (req, res) => {
     // Deletes a song object from DB
+    console.log('Controller: req.body >>> ', req.body);
+    SongData.deleteOne({ songName: req.body.songName })
+      .then(() => {
+        console.log('Controller: successfully deleted from db!');
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.error('Controller: unable to delete from db...', err);
+      });
   },
 };

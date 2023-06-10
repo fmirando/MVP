@@ -3,7 +3,12 @@ import ReactDom from 'react-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 
 function InfoModal({ song, isModalOpen, setIsModalOpen }) {
-  // TODO: add a delete song card feature
+  // TODO: add a edit and delete song card feature
+
+  const handleEdit = () => {
+    // TODO: send axios request to edit current song from db
+  };
+
   return ReactDom.createPortal(
     <div
       className="modal"
