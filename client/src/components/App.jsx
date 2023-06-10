@@ -27,24 +27,15 @@ const CDN_MUSIC_URL = 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/objec
 const CDN_IMAGES_URL = 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/object/public/SongArt/';
 
 function App() {
-  // Old states (probably don't need all of these)
   const [songFile, setSongFile] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [upload, setUpload] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // New states
   // cardData holds an array of all current song cards
   const [cardData, setCardData] = useState([]);
-  // const [artist, setArtist] = useState('');
-  // const [songName, setSongName] = useState('');
-  // const [genre, setGenre] = useState('');
-  // const [daw, setDaw] = useState('');
-  // const [bpm, setBpm] = useState('');
-  // const [key, setKey] = useState('');
-  // const [description, setDescription] = useState('');
 
-  // This state is used when uploading a NEW SONG to DB
+  // songData holds the data for the new song that's about to be uploaded
   const [songData, setSongData] = useState({
     artist: '',
     songName: '',
@@ -58,41 +49,8 @@ function App() {
     imageURL: '',
   });
 
-  // GET MUSIC FROM SUPABASE
-  // TODO: Possibly refactor to grab from db instead
-  // async function getMusic() {
-  //   const { data, error } = await supabase
-  //     .storage
-  //     .from('Music')
-  //     .list('');
-  //   if (data !== null) {
-  //     console.log('music', data);
-  //     // setMusic(data.filter((song) => song.name !== '.emptyFolderPlaceholder'));
-  //   } else {
-  //     alert('Error grabbing music from Supabase :(', error);
-  //   }
-  // }
-
-  // GET IMAGES FROM SUPABASE
-  // May not need this anymore, just grab url from DB
-  // May not need this anymore, just grab url from DB
-  // async function getImages() {
-  //   const { data, error } = await supabase
-  //     .storage
-  //     .from('SongArt')
-  //     .list('');
-  //   if (data !== null) {
-  //     console.log('Images', data);
-  //     // setImages(data.filter((image) => image.name !== '.emptyFolderPlaceholder'));
-  //   } else {
-  //     alert('Error grabbing images from Supabase :(', error);
-  //   }
-  // }
-
   // UPLOAD IMAGE TO SUPABASE
-  // May not need this anymore, just grab url from DB
   async function uploadImage(img) {
-    // setLoading(true);
     const { data, error } = await supabase.storage
       .from('SongArt')
       .upload(`${uuidv4()}.image`, img);
@@ -101,17 +59,15 @@ function App() {
       console.error(error);
       alert('Error uploading image file to Supabase :(');
     } else {
-      // setLoading(false);
-      setSongData({ ...songData, imageURL: CDN_IMAGES_URL + data });
+      const imagePath = CDN_IMAGES_URL + data.path;
       alert('File successfully uploaded :)');
-      console.log('You uploaded this: ', data);
+      console.log('You uploaded this: ', data.path);
+      return imagePath;
     }
   }
 
   // UPLOAD SONG TO SUPABASE
-  // Need to refactor so that it uploads to my DB as well
   async function uploadSong(song) {
-    // setLoading(true);
     const { data, error } = await supabase.storage
       .from('Music')
       .upload(`${uuidv4()}.mp3`, song);
@@ -120,28 +76,28 @@ function App() {
       alert('Error uploading music file to Supabase :(');
     } else {
       // Also need to immediately add to cardData state so page rerenders with new song card
-      setSongData({ ...songData, songURL: CDN_MUSIC_URL + data });
-      setLoading(false);
-      console.log('You uploaded this: ', data);
+      const songPath = CDN_MUSIC_URL + data.path;
+      console.log('You uploaded this: ', data.path);
+      return songPath;
     }
   }
 
   const handleUpload = (song, image) => {
-    // Uploads song and image, waits to get back links for Supabase to store them into state THEN
-    // sends songData thru axios request to upload data into DB
-    // This function will get invoked when user clicks 'Submit' button
     // Chain of events: upload song -> upload image -> axios request to send songData
     setLoading(true);
     uploadSong(song)
-      .then(() => {
+      .then((sPath) => {
         uploadImage(image)
-          .then(() => {
-            console.log('handleUpload: songData ->', songData);
-            axios.post('/postmusic', songData)
+          .then((iPath) => {
+            console.log('iPath and sPath: ', iPath, sPath);
+            const updatedData = { ...songData, imageURL: `${iPath}`, songURL: `${sPath}` };
+            setSongData(updatedData);
+            console.log('handleUpload: songData after setting paths PLS WORK ->', updatedData);
+            axios.post('/postmusic', updatedData)
               .then(() => {
                 setLoading(false);
                 // Update cardData state so new song immediately renders on page
-                setCardData([...cardData, songData]);
+                setCardData([...cardData, updatedData]);
                 alert('Successfully uploaded to database :)');
               })
               .catch((err) => {
