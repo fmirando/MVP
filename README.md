@@ -41,6 +41,8 @@ WavCard is a song gallery of some of the music I've created, represented in a ca
 - Authorization so my friends can have their own carousel lists.
 - Integrated into a personal music/coding portfolio.
 - Vertical parallax effect scrolling through different artist carousel lists.
-- Custom made music player. 
+- Custom made music player.
+- Waveform visualizer
+- Currently I can play multiple songs at the same time. Need to make it so that only one song plays at a time.
 
 
