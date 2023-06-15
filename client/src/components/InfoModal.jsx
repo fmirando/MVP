@@ -144,7 +144,7 @@ function InfoModal({ song, setIsModalOpen }) {
               {editedSong.artist}
             </h3>
             <h4>
-              editedSong Name:
+              Song Name:
               {' '}
               {editedSong.songName}
             </h4>
