@@ -30,7 +30,17 @@ module.exports = {
   },
 
   updateSong: (req, res) => {
-    // Finds a song in DB and updates specific value(s)
+    console.log('updateSong req.body: ', req.body);
+    const { oldSong, newSong } = req.body;
+    SongData.findOneAndUpdate(oldSong, newSong)
+      .then(() => {
+        console.log('updateSong: song successfully updated :)');
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.error('updateSong: Unable to update song in db :(', err);
+        res.sendStatus(500);
+      });
   },
 
   deleteSong: (req, res) => {

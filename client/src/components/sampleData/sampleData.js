@@ -35,6 +35,18 @@ const sampleData = [
     songURL: 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/object/public/Music/ca17339a-6e51-4e10-9337-07c9914756d3.mp3',
     imageURL: 'https://wlcwstpeuowhoknayute.supabase.co/storage/v1/object/public/SongArt/e683ff27-5e8a-4261-87b0-67e4f45262f6.image',
   },
+  {
+    artist: 'dejaview',
+    songName: 'big sur [beat]',
+    releaseDate: 'unreleased',
+    genre: 'beat',
+    key: 'g#maj',
+    bpm: '95',
+    daw: 'ableton',
+    description: 'Sampled an old soul sample a few months ago. Still needs a bass',
+    songURL: '',
+    imageURL: '',
+  },
 ];
 
 export default sampleData;

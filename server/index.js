@@ -20,7 +20,7 @@ app.get('/getmusic', songControllers.getMusic);
 
 app.post('/postmusic', songControllers.addSong);
 
-app.patch('updatemusic', songControllers.updateSong);
+app.patch('/updatemusic', songControllers.updateSong);
 
 app.delete('/deletemusic', songControllers.deleteSong);
 

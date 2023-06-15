@@ -6,8 +6,9 @@ import axios from 'axios';
 // CSS/bootstrap imports
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
-  Container, Form, Button,
+  Container, Form, Button, Navbar, Nav,
 } from 'react-bootstrap';
+import { AiOutlineSound } from 'react-icons/ai';
 
 // Supabase imports
 import { createClient } from '@supabase/supabase-js';
@@ -16,9 +17,6 @@ import { v4 as uuidv4 } from 'uuid';
 // Component imports
 import SongCarousel from './SongCarousel';
 import LoadingIcon from './LoadingIcon';
-
-// Importing sample data (temporary)
-import sampleData from './sampleData/sampleData';
 
 // Creating connection to supabase: supabase project url and key
 const supabase = createClient('https://wlcwstpeuowhoknayute.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsY3dzdHBldW93aG9rbmF5dXRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODYwNzQ0NDgsImV4cCI6MjAwMTY1MDQ0OH0.7T2u8O81YdZD38jNrtI3zblv5_5KSxl6iOVJPvnY4jc');
@@ -88,10 +86,8 @@ function App() {
       .then((sPath) => {
         uploadImage(image)
           .then((iPath) => {
-            console.log('iPath and sPath: ', iPath, sPath);
             const updatedData = { ...songData, imageURL: `${iPath}`, songURL: `${sPath}` };
             setSongData(updatedData);
-            console.log('handleUpload: songData after setting paths PLS WORK ->', updatedData);
             axios.post('/postmusic', updatedData)
               .then(() => {
                 setLoading(false);
@@ -142,6 +138,8 @@ function App() {
           top: 0,
           left: 0,
           margin: '20px',
+          backgroundColor: '#6f9ac3',
+          borderStyle: 'hidden',
         }}
         onClick={(e) => {
           e.preventDefault();
@@ -153,76 +151,77 @@ function App() {
       </Button>
 
       {loading && (
-        <LoadingIcon />
+      <LoadingIcon />
       )}
 
       {upload && (
-        <>
-          <Form.Group className="mb-3 mt-3">
-            <Form.Label>Upload your music here!</Form.Label>
-            <Form.Control type="file" accept="audio/mpeg, audio/wav" onChange={(e) => setSongFile(e.target.files[0])} />
-          </Form.Group>
+      <>
+        <Form.Group className="mb-3 mt-3">
+          <Form.Label>Upload your music here!</Form.Label>
+          <Form.Control type="file" accept="audio/mpeg, audio/wav" onChange={(e) => setSongFile(e.target.files[0])} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Upload your image here!</Form.Label>
-            <Form.Control type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Upload your image here!</Form.Label>
+          <Form.Control type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Artist</Form.Label>
-            <Form.Control type="text" value={songData.aritst} onChange={(e) => setSongData({ ...songData, artist: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Artist</Form.Label>
+          <Form.Control type="text" value={songData.aritst} onChange={(e) => setSongData({ ...songData, artist: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Song Name</Form.Label>
-            <Form.Control type="text" value={songData.songName} onChange={(e) => setSongData({ ...songData, songName: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Song Name</Form.Label>
+          <Form.Control type="text" value={songData.songName} onChange={(e) => setSongData({ ...songData, songName: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Release Date</Form.Label>
-            <Form.Control type="text" value={songData.releaseDate} onChange={(e) => setSongData({ ...songData, releaseDate: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Release Date</Form.Label>
+          <Form.Control type="text" value={songData.releaseDate} onChange={(e) => setSongData({ ...songData, releaseDate: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Genre</Form.Label>
-            <Form.Control type="text" value={songData.genre} onChange={(e) => setSongData({ ...songData, genre: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Genre</Form.Label>
+          <Form.Control type="text" value={songData.genre} onChange={(e) => setSongData({ ...songData, genre: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>DAW Used</Form.Label>
-            <Form.Control type="text" value={songData.daw} onChange={(e) => setSongData({ ...songData, daw: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>DAW Used</Form.Label>
+          <Form.Control type="text" value={songData.daw} onChange={(e) => setSongData({ ...songData, daw: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>BPM</Form.Label>
-            <Form.Control type="number" value={songData.bpm} onChange={(e) => setSongData({ ...songData, bpm: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>BPM</Form.Label>
+          <Form.Control type="number" value={songData.bpm} onChange={(e) => setSongData({ ...songData, bpm: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Key</Form.Label>
-            <Form.Control type="text" value={songData.key} onChange={(e) => setSongData({ ...songData, key: e.target.value })} />
-          </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Key</Form.Label>
+          <Form.Control type="text" value={songData.key} onChange={(e) => setSongData({ ...songData, key: e.target.value })} />
+        </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label>
-            <Form.Control as="textarea" rows={3} value={songData.description} onChange={(e) => setSongData({ ...songData, description: e.target.value })} />
-          </Form.Group>
-          <Button
-            variant="primary"
-            onClick={() => {
-              if (songFile && imageFile) {
-                handleUpload(songFile, imageFile);
+        <Form.Group className="mb-3">
+          <Form.Label>Description</Form.Label>
+          <Form.Control as="textarea" rows={3} value={songData.description} onChange={(e) => setSongData({ ...songData, description: e.target.value })} />
+        </Form.Group>
+        <Button
+          style={{ backgroundColor: '#6f9ac3', borderStyle: 'hidden' }}
+          variant="primary"
+          onClick={() => {
+            if (songFile && imageFile) {
+              handleUpload(songFile, imageFile);
 
-                // Reset upload flag and states to hold song and image files
-                setUpload(false);
-                setSongFile(null);
-                setImageFile(null);
-              }
-            }}
-          >
-            Submit
-          </Button>
-        </>
+              // Reset upload flag and states to hold song and image files
+              setUpload(false);
+              setSongFile(null);
+              setImageFile(null);
+            }
+          }}
+        >
+          Submit
+        </Button>
+      </>
       )}
       <SongCarousel
         cardData={cardData}

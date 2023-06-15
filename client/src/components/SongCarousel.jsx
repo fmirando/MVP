@@ -33,13 +33,13 @@ function SongCarousel({ cardData, setCardData }) {
 
   return (
     <div className="container">
-      <h1 className="heading">Dejaview</h1>
+      <h1 className="welcome">Welcome, Dejaview</h1>
       <Swiper
         effect="coverflow"
         grabCursor="true"
         centeredSlides="true"
         loop="true"
-        slidesPerView="3"
+        slidesPerView="4"
         spaceBetween="10"
         coverflowEffect={{
           rotate: 0,

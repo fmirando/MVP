@@ -3,6 +3,7 @@ import axios from 'axios';
 import AudioPlayer from 'react-audio-player';
 import { Button } from 'react-bootstrap';
 import { BsThreeDotsVertical } from 'react-icons/bs';
+import { FaTrash } from 'react-icons/fa';
 import InfoModal from './InfoModal';
 
 function SongCard({ song, cardData, setCardData }) {
@@ -36,7 +37,7 @@ function SongCard({ song, cardData, setCardData }) {
         position: 'relative',
         width: '400px',
         paddingTop: '220%', // Adjust the top padding to control the height
-        borderRadius: '14px',
+        borderRadius: '25px',
         overflow: 'visible',
       }}
     >
@@ -63,7 +64,7 @@ function SongCard({ song, cardData, setCardData }) {
           boxSizing: 'border-box',
         }}
       >
-        <BsThreeDotsVertical
+        <FaTrash
           style={{
             position: 'absolute',
             top: '10px',
@@ -73,7 +74,7 @@ function SongCard({ song, cardData, setCardData }) {
           onClick={() => handleDelete(song)}
         />
 
-        <Button type="button" onClick={() => setIsModalOpen(true)}>i</Button>
+        <Button type="button" style={{ background: '#6f9ac3', borderStyle: 'hidden' }} onClick={() => setIsModalOpen(true)}>i</Button>
         <h3 style={{ textAlign: 'center' }}>{song.songName}</h3>
 
         <AudioPlayer
