@@ -1,12 +1,6 @@
 # MVP
 MVP Project: WavCard, A Music Gallery For Dejaview/Frank
 
- 
-
-# MVP
-
-MVP is a project that provides a full stack web application, allowing users to create a custom MVP product.
-
 ## Table of Contents
 
 - [Overview](#overview)
@@ -14,8 +8,6 @@ MVP is a project that provides a full stack web application, allowing users to c
 - [Visuals](#visuals)
 - [Installation and Usage](#installation-and-usage)
 - [Authors and Contributors](#authors-and-contributors)
-- [Wins and Improvements](#wins-and-improvements)
-- [Tips for a Better Readme](#tips-for-a-better-readme)
 
 ## Overview
 
