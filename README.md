@@ -27,7 +27,7 @@ WavCard is a song gallery of some of the music I've created, represented in a ca
 - [![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 - [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 - [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-- [![Material UI](https://img.shields.io/badge/Material%20UI-000000?style=for-the-badge&logo=material-ui&logoColor=white)](https://material-ui.com/)
+- [![Supabase]([https://img.shields.io/badge/Material%20UI-000000?style=for-the-badge&logo=material-ui&logoColor=white)](https://material-ui.com/](https://raw.githubusercontent.com/supabase/supabase/master/packages/common/assets/images/supabase-logo-wordmark--dark.png))
 
 ## Visuals
 
