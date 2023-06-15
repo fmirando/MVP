@@ -99,6 +99,12 @@ function InfoModal({ song, setIsModalOpen }) {
             />
             <input
               type="text"
+              name="releasedate"
+              value={editedSong.releaseDate}
+              onChange={(e) => setEditedSong({ ...editedSong, releaseDate: e.target.value })}
+            />
+            <input
+              type="text"
               name="genre"
               value={editedSong.genre}
               onChange={(e) => setEditedSong({ ...editedSong, genre: e.target.value })}
@@ -148,6 +154,11 @@ function InfoModal({ song, setIsModalOpen }) {
               {' '}
               {editedSong.songName}
             </h4>
+            <p>
+              Release Date:
+              {' '}
+              {editedSong.releaseDate}
+            </p>
             <p>
               Genre:
               {' '}
