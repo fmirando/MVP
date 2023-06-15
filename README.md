@@ -19,7 +19,7 @@ MVP is a project that provides a full stack web application, allowing users to c
 
 ## Overview
 
-MVP is a project that provides a full stack web application, allowing users to create a custom MVP product. The app uses React for the front end, MongoDB for the database, Express.js for the server, Node.js for the backend and Material UI for styling. It allows users to create their own MVP product and view the progress of their product.
+WavCard is a song gallery of some of the music I've created, represented in a carousel with song product cards.
 
 ## Technologies
 
@@ -36,23 +36,18 @@ MVP is a project that provides a full stack web application, allowing users to c
 ## Installation and Usage
 
 1. Fork and clone the repository
-2. Install the dependencies `yarn install`
+2. Install the dependencies `npm install`
 3. Create a .env file
-4. Start the application `yarn start`
+4. Start the application `npm run dev`
 
 ## Authors and Contributors
 
-- Francisco Mirando
+- Frank Mirando
 
-## Wins and Improvements
+## Future Implementations
+- Authorization so my friends can have their own carousel lists.
+- Integrated into a personal music/coding portfolio.
+- Vertical parallax effect scrolling through different artist carousel lists.
+- Custom made music player. 
 
-The project was successful in providing a full stack web application that allowed users to create a custom MVP product. The app is easy to use and the visual interface is appealing. One area of improvement would be to add more features to the application, such as the ability to track progress and share the product with other users.
 
-## Tips for a Better Readme
-
-- Use images or gifs to demonstrate the project
-- Use tables to organize information
-- Include a link to the project's source code
-- Include a link to alexandresanlim/Badges4-README.md-Profile#badges for better badges
-- Include a section for troubleshooting common issues
-- Add a link to the project's license
